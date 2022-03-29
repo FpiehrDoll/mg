@@ -5,7 +5,7 @@ $db = new mysqli("localhost", "root", "", "mgmed");
 //$q = "SELECT * FROM staff";
 //$result = $db->query($q); 
 $q = $db->prepare("SELECT * FROM staff");
-if ($q->execute()) {
+if ($q && $q->execute()) {
     //wywoła jeżeli kwerenda wykona się prawidłowo
     $result = $q->get_result();
     while($row = $result->fetch_assoc()) {
