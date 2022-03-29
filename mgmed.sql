@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 29 Mar 2022, 12:46
+-- Czas generowania: 29 Mar 2022, 13:36
 -- Wersja serwera: 10.4.22-MariaDB
 -- Wersja PHP: 8.0.15
 
@@ -45,6 +45,45 @@ INSERT INTO `appointment` (`id`, `staff_id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `patient`
+--
+
+CREATE TABLE `patient` (
+  `id` int(11) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `phone` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `patient`
+--
+
+INSERT INTO `patient` (`id`, `firstName`, `lastName`, `phone`) VALUES
+(1, 'test', 'testtest', '797997112');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `patientappointment`
+--
+
+CREATE TABLE `patientappointment` (
+  `id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `appointment_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `patientappointment`
+--
+
+INSERT INTO `patientappointment` (`id`, `patient_id`, `appointment_id`) VALUES
+(1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `staff`
 --
 
@@ -75,6 +114,19 @@ ALTER TABLE `appointment`
   ADD KEY `staff_id` (`staff_id`);
 
 --
+-- Indeksy dla tabeli `patient`
+--
+ALTER TABLE `patient`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `patientappointment`
+--
+ALTER TABLE `patientappointment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patient_id` (`patient_id`);
+
+--
 -- Indeksy dla tabeli `staff`
 --
 ALTER TABLE `staff`
@@ -89,6 +141,18 @@ ALTER TABLE `staff`
 --
 ALTER TABLE `appointment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `patient`
+--
+ALTER TABLE `patient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `patientappointment`
+--
+ALTER TABLE `patientappointment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `staff`
