@@ -1,5 +1,13 @@
 <?php 
-
+    $db = new mysqli("localhost", "root", "", "mgmed");
+    $appointmentId = $_REQUEST['appointmentID'];
+    //dwa przypadki: nowy albo stary pacjent
+    if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName'])) {
+        //nowy pacjent
+    } else {
+        //powracający pacjent
+    }
+    
     $db = new mysqli("localhost", "root", "", "mgmed");
     $appointmentId = $_REQUEST['id'];
     $q = $db->prepare("SELECT * FROM appointment WHERE id = ?");
@@ -20,15 +28,4 @@ $q->prepare("INSERT INTO patientAppointment VALUES (NULL, ?, ?)");
 $q->bind_param("ii", $appointmentId, $patientId);
 $q->execute();
 echo "Wizyta została umówiona!";
-} else { 
-    ?>
-        <form action="appointment.php">
-        imię: <input type="text" name="firstName">
-        Nazwisko: <input type="text" name="lastName">
-        Telefon: <input type="text" name="phone">
-        <input type="hidden" value="<?php echo $appointmentId ?>" name="id">
-        <input type="submit" value="Umów wizytę">
-        </form>
-    <?php
 }
-?>
