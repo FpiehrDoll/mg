@@ -4,8 +4,18 @@
     //dwa przypadki: nowy albo stary pacjent
     if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName'])) {
         //nowy pacjent
+        $q->prepare("INSERT INTO patient VALUES (NULL, ?, ?, ?, ?)");
+        $q->bind_param("sss", $_REQUEST['firstName'], $_REQUEST['lastName'],
+                              $_REQUEST['phone', $_REQUEST['pesel']);
+        $q->execute();
+        $patientId = $db->insert_id;
+        $q->prepare("INSERT INTO patientappointment VALUES (NULL, ?, ?)");
+        $q->bind_param("sss", $patientId, $appointmentId);
+        $q->execute();
+        echo "Zapisano na wizytę!";
     } else {
         //powracający pacjent
+        //DOKONCZYC 35 MINUTA FILMU
     }
     
     $db = new mysqli("localhost", "root", "", "mgmed");
@@ -20,7 +30,7 @@
         echo "Umów wizytę w terminie ".date("j.m H:i", $appointmentTimestamp)."<br>";
 }
 if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName']) && isset($_REQUEST['phone'])) {
-$q->prepare("INSERT INTO patient VALUES (NULL, ?, ?, ?)");
+$q->prepare("INSERT INTO patient VALUES (NULL, ?, ?, ?, ?)");
 $q->bind_param("sss", $_REQUEST['firstName'], $_REQUEST['lastName'], $_REQUEST['phone']);
 $q->execute();
 $patientId = $db->insert_id;
