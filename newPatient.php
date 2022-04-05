@@ -24,5 +24,3 @@ if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName'])) {
 }
 
 ?>
-<label for="phone">Numer telefonu:</label>
-<input type="text" name="phone" id="phone">
